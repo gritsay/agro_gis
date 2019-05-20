@@ -1,6 +1,14 @@
-import qgis.core, os
+import os
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from qgis.core import *
+
+QgsApplication.setPrefixPath("C:/Program Files/QGIS 3.6", True)
+qgs = QgsApplication([], False)
+qgs.initQgis()
+
 i = 1
-os.chdir('C:/Projects/qgis/source') #рабочая директория
+os.chdir("C:/Users/SHIF3R/Documents/agro_gis/source")
 for file in os.listdir():
     if file.endswith(".tif"):
         myRaster = QgsRasterLayer(file, str(i))
@@ -15,8 +23,9 @@ for file in os.listdir():
         render = QgsMapRendererParallelJob(options)
         def finished():
             img = render.renderedImage()
-            img.save("result//" + str(i) + ".png", "png") #сохраняет в папку result
+            img.save("result//" + str(i) + ".png", "png")
         render.finished.connect(finished)
         render.start()
         render.waitForFinished()
         i = i + 1
+qgs.exitQgis()
