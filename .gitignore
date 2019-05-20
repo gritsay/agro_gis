@@ -1,0 +1,14 @@
+
+\.vscode/
+
+__pycache__/
+
+*.tif
+
+*.xml
+
+*.png
+
+Губарь NDVI\.docx
+
+*.tiff
